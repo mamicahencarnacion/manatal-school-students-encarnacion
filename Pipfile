@@ -1,0 +1,19 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+drf-nested-routers = "*"
+djangorestframework = "*"
+psycopg2 = "*"
+django = "*"
+django-environ = "*"
+black = "*"
+django-countries = "*"
+faker = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.9"
