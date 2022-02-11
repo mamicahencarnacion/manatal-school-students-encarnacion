@@ -1,6 +1,8 @@
 from datetime import date
+
 from django.db import models
 from django_countries.fields import CountryField
+
 from .validators import validate_greater_than_zero
 
 
@@ -19,17 +21,9 @@ class Student(models.Model):
     student_id = models.CharField(max_length=20, editable=False, primary_key=True)
     first_name = models.CharField(max_length=20)
     last_name = models.CharField(max_length=20)
+    nationality = CountryField(default="PH")
+    birthdate = models.DateField(null=True)
     school = models.ForeignKey(School, on_delete=models.CASCADE)
 
     def __str__(self):
-        return str(self.student_id)
-
-
-class StudentDetail(models.Model):
-    student = models.ForeignKey(Student, on_delete=models.CASCADE)
-    nationality = CountryField(default="PH")
-    birthdate = models.DateField(default=date(1900, 1, 1))
-    age = models.PositiveIntegerField(editable=False, default=0)
-
-    def __str__(self):
-        return f"{self.student.last_name}, {self.student.first_name}"
+        return f"{self.last_name}, {self.first_name}"
