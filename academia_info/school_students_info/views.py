@@ -66,3 +66,18 @@ class FilteredStudentViewSet(ModelViewSet):
 
     def get_queryset(self):
         return Student.objects.filter(school=self.kwargs["schools_pk"])
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.get_queryset()
+        serializer = StudentSerializer(queryset, many=True)
+        today = date.today()
+        for data in serializer.data:
+            if data.get("birthdate"):
+                born = datetime.strptime(data["birthdate"], "%Y-%m-%d")
+                data["age"] = (
+                    today.year
+                    - born.year
+                    - ((today.month, today.day) < (born.month, born.day))
+                )
+                data.move_to_end("school")
+        return Response(serializer.data)
