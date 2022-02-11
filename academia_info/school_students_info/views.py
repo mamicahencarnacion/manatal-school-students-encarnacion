@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 
 class StudentViewSet(ModelViewSet):
     """
-    A simple ViewSet for viewing and editing accounts.
+    List, retrieve, and create a student.
     """
 
     queryset = Student.objects.all()
@@ -50,7 +50,7 @@ class StudentViewSet(ModelViewSet):
 
 class SchoolViewSet(ModelViewSet):
     """
-    A simple ViewSet for viewing and editing accounts.
+    List, retrieve, and create a school.
     """
 
     queryset = School.objects.all()
@@ -59,7 +59,7 @@ class SchoolViewSet(ModelViewSet):
 
 class FilteredStudentViewSet(ModelViewSet):
     """
-    A simple ViewSet for viewing and editing accounts.
+    List students filtered by school ID.
     """
 
     serializer_class = StudentSerializer
